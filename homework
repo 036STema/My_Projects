@@ -1,0 +1,31 @@
+action = input('Какое действие нужно вычислить ')
+list_action = action.split()
+print(list_action)
+
+def computing(action):
+  try:
+    assert int(list_action[1]) >= 0 and int(list_action[2]) >= 0
+  except AssertionError:
+    print('Введите положительные числа')
+  
+  if action[0] == '+':
+    answer = int(list_action[1]) + int(list_action[2])
+    print(answer)
+  elif action[0] == '-':
+    answer = int(list_action[1]) - int(list_action[2])
+    print(answer)
+  elif action[0] == '*':
+    answer = int(list_action[1]) * int(list_action[2])
+    print(answer)
+  elif action[0] == '/':
+    try:
+      answer = int(list_action[1]) / int(list_action[2])
+    except ZeroDivisionError:
+      print('На ноль делить нельзя')
+    else:
+      print(answer)
+  else:
+    print('Вы ввели что-то не то')
+  #
+
+computing(list_action)
