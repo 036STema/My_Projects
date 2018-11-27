@@ -21,7 +21,7 @@ def pusto_strip(x):
         ingredient = f.readline().split('|')
         new_i = [i.strip() for i in ingredient]
         if new_i[0] == '':
-            print('geca')
+            pass
         else:
             cook_book[name_dish].append({'name':new_i[0],'quantity':new_i[1], 'measure':new_i[2]})
         y += 1
