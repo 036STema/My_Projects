@@ -1,4 +1,4 @@
-def write_new_dish(dish, ingredients):
+ write_new_dish(dish, ingredients):
     f = open('/home/rod/Документы/Python-developer/Python/Read_write/cook_book1.txt','a')
     f.write('{} \n{}\n'.format(dish, ingredients))
     x=1
@@ -26,6 +26,13 @@ def pusto_strip(x):
             cook_book[name_dish].append({'name':new_i[0],'quantity':new_i[1], 'measure':new_i[2]})
         y += 1
 
+def get_shop_list_by_dishes(dishes, person_count):
+    l = []
+    for dish in dishes:
+        l.append(cook_book[dish])
+    for x in l:
+        for i in x:
+            print('{}: {}{}{}, {}{}'.format(i['name'],'{',"'measure':", i['measure'], "'quantity':", int(i['quantity'])*person_count),"}")
 
 cook_book = {}
 
@@ -37,4 +44,8 @@ for line in f:
     pusto_strip(int(number_ingredients))
 f.close()
 
+get_shop_list_by_dishes(['Омлет', 'Утка по-пекински'], 3)
+print('___________________________________')
 print(cook_book)
+
+
