@@ -27,10 +27,10 @@ def pusto_strip(x):
         y += 1
 
 def get_shop_list_by_dishes(dishes, person_count):
-    l = []
+    list_ingredient = []
     for dish in dishes:
-        l.append(cook_book[dish])
-    for x in l:
+        list_ingredient.append(cook_book[dish])
+    for x in list_ingredient:
         for i in x:
             print('{}: {}{}{}, {}{}'.format(i['name'],'{',"'measure':", i['measure'], "'quantity':", int(i['quantity'])*person_count),"}")
 
