@@ -51,6 +51,20 @@ for file in file_list:
 
 print('Всего найдено файлов - {}'.format(len(file_sql)))
 
+list_find = []
+def find_file(name_file):
+    for name_file in file_sql:
+        if 'user_g' in name_file:
+            list_find.append(name_file)
+
+    print(list_find)
+    return(list_find)
+            #print('Всего найдено файлов - {}'.format(len(name_file)))
+
+name_file = input('Какой файл вы ищите? ')
+find_file(name_file)
+
+
 if __name__ == '__main__':
     # ваша логика
 pass
