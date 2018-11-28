@@ -38,7 +38,18 @@
 import os
 
 migrations = 'Migrations'
-current_dir = os.path.dirname(os.path.abspath(__file__))
+current_dir = os.path.dirname(os.path.abspath(migrations))
+os.path.join(current_dir, migrations)
+#file_list = os.listdir(path="/home/rod/Документы/Python-developer/Python/Migrations")
+file_list = (os.listdir(os.path.join("/home/rod/Документы/Python-developer/Python/", migrations)))
+
+
+file_sql = []
+for file in file_list:
+    if '.sql' in file:
+        file_sql.append(file)
+
+print('Всего найдено файлов - {}'.format(len(file_sql)))
 
 if __name__ == '__main__':
     # ваша логика
