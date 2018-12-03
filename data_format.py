@@ -38,6 +38,5 @@ for x in dict_words.keys():
         if y == dict_words[x]:
             t_10.append(x)
 
-print(set(t_10))
 for x in set(t_10):
     print(x, dict_words[x])
