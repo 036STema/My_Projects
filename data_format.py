@@ -39,5 +39,5 @@ for x in dict_words.keys():
             t_10.append(x)
 
 print(set(t_10))
-for word in set(t_10):
-    print(word, dict_words[x])
+for x in set(t_10):
+    print(x, dict_words[x])
