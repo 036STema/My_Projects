@@ -1,3 +1,12 @@
+from abc import ABCMeta, abstractmethod, abstractproperty
+
+class Animal():
+    __metaclass__ = ABCMeta
+
+    @abstractproperty
+    def collect():
+        pass
+
 class Pet():
     name = 'no name'
     weight = 0
@@ -10,61 +19,65 @@ class Pet():
 
     def feed_animal(self):
         self.feed += 1
-        print("Ваше животное по кличке " + self.name + " " + "покормленно раз(а)" + str(self.feed))
+        print("Ваше животное по кличке " + self.name + " " + "покормленно")
+        return self.feed
 
     def voice_animal(self):
         print(self.voice)
 
 
-class Bird(Pet):
+class Bird(Pet, Animal):
     eggs = 0
-
-    def collect_eggs(self, egg):
-        self.eggs += 1 * egg
+    def collect(self):
+        self.eggs += 2
         print('Всего собрано яиц  ' + str(self.eggs))
+        return self.eggs
 
 class Horned_cattle(Pet):
     milk = 0
 
-    def milk_animal(self):
+    def collect(self):
         self.milk += 1
         print("Животное подоенно")
-
+        return self.milk
+        
 class Sheep(Pet):
     haircat = 0
 
-    def haircat_animal(self):
+    def collect(self):
         self.haircat += 1
         print('Животное подстриженно')
+        return self.haircat
 
-class Gooses(Bird):
+class Goose(Bird):
     voice = "га-га-га"
 
-    def collect_eggs(self, egg):
-        super().collect_eggs(egg*2)
 
+list_animal = []
 
-goose_1 = Gooses('Серый', 8)
-goose_2 = Gooses('Белый', 7)
+goose_1 = Goose('Серый', 8)
+list_animal.append(goose_1)
+goose_2 = Goose('Белый', 7)
+list_animal.append(goose_2)
 cow = Horned_cattle('Манька', 300)
+list_animal.append(cow)
 cow.voice = 'Мууу'
 sheep_1 = Sheep('Барашек', 35)
+list_animal.append(sheep_1)
 sheep_2 = Sheep('Кудрявый', 40)
+list_animal.append(sheep_2)
 chicken_1 = Bird('Ко-Ко', 4)
+list_animal.append(chicken_1)
 chicken_2 = Bird('Кукареку', 5)
+list_animal.append(chicken_2)
 goat_1 = Horned_cattle('Рога', 41)
+list_animal.append(goat_1)
 goat_2 = Horned_cattle('Копыта', 43)
+list_animal.append(goat_2)
 duck = Bird('Кряква', 5)
+list_animal.append(duck)
 duck.voice = 'Кря-кря'
 
-
-goose_1.feed_animal()
-goose_1.voice_animal()
-goose_1.collect_eggs(7)
-
-
-goose_2 = Gooses('Белый', 6)
-print(goose_2.name)
 
 dict_animal_weight = {}
 
@@ -72,26 +85,17 @@ def weight_animal(name):
     dict_animal_weight[name.name] = name.weight
     return
 
-weight_animal(goose_1)
-weight_animal(goose_2)
-weight_animal(cow)
-weight_animal(sheep_1)
-weight_animal(sheep_2)
-weight_animal(chicken_1)
-weight_animal(chicken_2)
-weight_animal(goat_1)
-weight_animal(goat_2)
-weight_animal(goat_1)
-weight_animal(duck)
+for animal in list_animal:
+    weight_animal(animal)
+    print(animal.feed_animal(), animal.collect())
 
 
-total_weight = []
-for x in dict_animal_weight:
-    total_weight.append(dict_animal_weight[x])
-print('Вес всех животных - ' + str(sum(total_weight)) + 'кг')
+dict_animal_weight.values()
+print('Вес всех животных - ' + str(sum(dict_animal_weight.values())) + 'кг')
 
-heaviest = max(total_weight)
+heaviest = max(dict_animal_weight.values())
 
 for name in dict_animal_weight:
     if heaviest == dict_animal_weight[name]:
         print('Самое тяжелое животное -',name)
+
