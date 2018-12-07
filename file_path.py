@@ -1,40 +1,3 @@
-# Задание
-# мне нужно отыскать файл среди десятков других
-# я знаю некоторые части этого файла (на память или из другого источника)
-# я ищу только среди .sql файлов
-# 1. программа ожидает строку, которую будет искать (input())
-# после того, как строка введена, программа ищет её во всех файлах
-# выводит список найденных файлов построчно
-# выводит количество найденных файлов
-# 2. снова ожидает ввод
-# поиск происходит только среди найденных на этапе 1
-# 3. снова ожидает ввод
-# ...
-# Выход из программы программировать не нужно.
-# Достаточно принудительно остановить, для этого можете нажать Ctrl + C
-
-# Пример на настоящих данных
-
-# python3 find_procedure.py
-# Введите строку: INSERT
-# ... большой список файлов ...
-# Всего: 301
-# Введите строку: APPLICATION_SETUP
-# ... большой список файлов ...
-# Всего: 26
-# Введите строку: A400M
-# ... большой список файлов ...
-# Всего: 17
-# Введите строку: 0.0
-# Migrations/000_PSE_Application_setup.sql
-# Migrations/100_1-32_PSE_Application_setup.sql
-# Всего: 2
-# Введите строку: 2.0
-# Migrations/000_PSE_Application_setup.sql
-# Всего: 1
-
-# не забываем организовывать собственный код в функции
-
 import os
 
 migrations = 'Migrations'
@@ -51,23 +14,27 @@ for file in file_list:
 
 print('Всего найдено файлов - {}'.format(len(file_sql)))
 
-list_find = []
-def find_file(name_file):
-    for name_file in file_sql:
-        if 'user_g' in name_file:
-            list_find.append(name_file)
+list_file = []
 
-    print(list_find)
-    return(list_find)
-            #print('Всего найдено файлов - {}'.format(len(name_file)))
-
-name_file = input('Какой файл вы ищите? ')
-find_file(name_file)
+while len(file_sql) != 1:
+    file_name = input('Введите название файла: ')
+    if len(file_sql) == 0:
+        print("Такого файла нет")
+    else:
+        for file in file_sql:
+            if file_name in file:
+                pass
+            else:
+                file_sql.remove(file)
+    print('Всего найдено файлов - {}'.format(len(file_sql)))
+else:
+    print(file_sql)
 
 
 if __name__ == '__main__':
     # ваша логика
-pass
+    pass
+
 
 
 import os
