@@ -17,15 +17,17 @@ print('Всего найдено файлов - {}'.format(len(file_sql)))
 list_file = []
 
 while len(file_sql) != 1:
-    file_name = input('Введите название файла: ')
+    file_name = input('Введите, что вы ищите: ')
     if len(file_sql) == 0:
         print("Такого файла нет")
     else:
         for file in file_sql:
-            if file_name in file:
-                pass
-            else:
-                file_sql.remove(file)
+            with  open('/home/rod/Документы/Python-developer/Python/{}/{}'.format(migrations,file), 'r') as file_contents:
+                file_contents = file_contents.read()
+                if file_name in file_contents:
+                    pass
+                else:
+                    file_sql.remove(file)
     print('Всего найдено файлов - {}'.format(len(file_sql)))
 else:
     print(file_sql)
