@@ -1,5 +1,7 @@
 from urllib.parse import urlencode
 import requests
+import progressbar
+import time
 
 token = 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae'
 
@@ -31,10 +33,8 @@ def main(user, group):
     'fields': 'contacts'
     }
     response = requests.get('https://api.vk.com/method/groups.isMember', params)
+    time.sleep(0.1)
     return response.json()['response']
-
-b=list_friends[0: 1]
-print(b)
 
 def search_friends(users, group):
     list_f = []
@@ -50,7 +50,7 @@ def search_friends(users, group):
         ansver.append(group)
 
 for group in list_groups:
-    search_friends(b, group)
+    search_friends(list_friends, group)
 
 for x in ansver:
     params_a = {
@@ -64,3 +64,4 @@ for x in ansver:
     }
     response4 = requests.get('https://api.vk.com/method/groups.getById', params_a)
     print(response4.json()['response'][0]['name'])
+
