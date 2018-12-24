@@ -33,8 +33,8 @@ def main(user, group):
     'fields': 'contacts'
     }
     response = requests.get('https://api.vk.com/method/groups.isMember', params)
-    time.sleep(0.1)
-    return response.json()['response']
+    #time.sleep(0.1)
+    return response.json()
 
 def search_friends(users, group):
     list_f = []
@@ -63,5 +63,6 @@ for x in ansver:
     'fields': 'contacts'
     }
     response4 = requests.get('https://api.vk.com/method/groups.getById', params_a)
-    print(response4.json()['response'][0]['name'])
+print(response4.json()['response'][0]['name'])
+
 
