@@ -2,6 +2,7 @@ from urllib.parse import urlencode
 import requests
 import progressbar
 import time
+import json
 
 token = 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae'
 
@@ -19,6 +20,7 @@ response_2 = requests.get('https://api.vk.com/method/friends.get', params)
 list_friends = response_2.json()
 list_friends = list_friends['response']['items']
 ansver = []
+dict_json = []
 #b=list_friends[14:35]
 
 def main(user, group):
@@ -50,6 +52,7 @@ def search_friends(users, group):
         print('В {} группе ваших друзей нет'.format(group))
         ansver.append(group)
 
+
 for group in list_groups:
     search_friends(list_friends, group)
 
@@ -63,9 +66,14 @@ for x in ansver:
     'extended': 0,
     'fields': 'contacts'
     }
-    response4 = requests.get('https://api.vk.com/method/groups.getById', params_a)
-    print(response4.json()['response'][0]['name'])
-    print(response4.json()['response'][0]['id'])
+    response1 = requests.get('https://api.vk.com/method/groups.getById', params_a)
+    name_group = response1.json()['response'][0]['name']
+    gid_group = response1.json()['response'][0]['id']
+    response = requests.get('https://api.vk.com/method/groups.getMembers', params_a)
+    count = response.json()['response']['count']
+    dict_json.append({'name': name_group, 'gid': gid_group, 'members_count': count })
+
+    print(dict_json)
 
 
 
