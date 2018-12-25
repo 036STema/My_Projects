@@ -35,9 +35,8 @@ def main(user, group):
     'extended': 0,
     'fields': 'contacts'
     }
-    sleep(0.3)
+    sleep(0.1)
     response = requests.get('https://api.vk.com/method/groups.isMember', params)
-    #time.sleep(0.1)
     return response.json()['response']
 
 def search_friends(users, group):
