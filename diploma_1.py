@@ -37,7 +37,7 @@ def search_friends(users, group):
                 list_f.append(user)
 
     if len(list_f) == 1:
-        print('В {} группе ваших друзей нет'.format(group))
+        print('В {} группе есть ваши друзья'.format(group))
     else:
         return group
 
