@@ -21,11 +21,14 @@ def check_f(user, group):
     'extended': 0,
     'fields': 'contacts'
     }
-
     response = requests.get('https://api.vk.com/method/groups.isMember', params)
-    #sleep(0.1)
     sys.stdout.write('|')
     sys.stdout.flush()
+    try:
+        response.json()['response']
+    except KeyError:
+        sleep(0.3)
+        response = requests.get('https://api.vk.com/method/groups.isMember', params)
     return response.json()['response']
 
 def search_friends(users, group):
