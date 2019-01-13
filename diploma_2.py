@@ -42,7 +42,6 @@ def check_f(user, group):
     'extended': 0,
     'fields': 'contacts'
     }
-
     number_of_attempts = 10
     for i in range(number_of_attempts):
         try:
@@ -66,8 +65,7 @@ def search_friends(users, group):
             a = check_f(user, group)
             #print(a)
             if a == 1:
-                list_f.append(user)
-                
+                list_f.append(user)         
     if len(list_f) >= 1:
         print('В {} группе есть ваши друзья'.format(group))
     else:
@@ -81,8 +79,7 @@ def main():
         'value': VALUE,
         'user_id': ID,
         'v':'5.92'
-        }
-        
+        }  
     list_groups = get_response_api('https://api.vk.com/method/groups.get', params)['items']
     list_friends = get_response_api('https://api.vk.com/method/friends.get', params)['items']
     #b=list_friends[14:25]
@@ -102,7 +99,6 @@ def main():
         'extended': 0,
         'fields': 'contacts'
         }
-
         name_group = get_response_api('https://api.vk.com/method/groups.getById', params_a)[0]['name']
         gid_group = get_response_api('https://api.vk.com/method/groups.getById', params_a)[0]['id']
         count = get_response_api('https://api.vk.com/method/groups.getMembers', params_a)['count']
