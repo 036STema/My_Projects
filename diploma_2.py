@@ -89,7 +89,6 @@ def main():
             pass
         else:
             answer.append(id_group)
-
     for group in answer:
         params_a = {
         'group_id': str(group),
@@ -103,7 +102,6 @@ def main():
         gid_group = get_response_api('https://api.vk.com/method/groups.getById', params_a)[0]['id']
         count = get_response_api('https://api.vk.com/method/groups.getMembers', params_a)['count']
         dict_json.append({'name': name_group, 'gid': gid_group, 'members_count': count })
-
     write_json(dict_json)
 
 if __name__ == '__main__':
