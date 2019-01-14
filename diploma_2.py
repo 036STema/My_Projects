@@ -27,7 +27,7 @@ def get_response_api(url, params, token = TOKEN, number_of_attempts = 10):
 
 
 def write_json(data):
-    with open('ansver.json','w') as file:
+    with open('ansver.json','a') as file:
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 
