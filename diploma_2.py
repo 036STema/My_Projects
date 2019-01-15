@@ -4,7 +4,7 @@ import json
 import sys
 
 TOKEN = 'ed1271af9e8883f7a7c2cefbfddfcbc61563029666c487b2f71a5227cce0d1b533c4af4c5b888633c06ae'
-ID = '171691064'
+ID = '171691064' #'522043309'
 VALUE = '' #eshmargunov
 
 
@@ -45,18 +45,19 @@ def check_f(user, group):
     response = get_response_api('https://api.vk.com/method/groups.isMember', params)
     return response
 
-
-def search_friends(users, group):
-    list_f = []
-    if len(list_f) < 1:
-        for user in users:
-            response = check_f(user, group)
-            if response == 1:
-                list_f.append(user)
-    if len(list_f) >= 1:
-        print('В {} группе есть ваши друзья'.format(group))
+def search_friends(users, group_id):
+    params = {
+        'group_id': str(group_id),
+        'user_ids': ','.join(str(user) for user in users),
+        'extended': 0,
+        'v': '5.92',
+    }
+    members_response = get_response_api('https://api.vk.com/method/groups.isMember', params)
+    members = [member['user_id'] for member in members_response if member['member'] != 0]
+    if len(members) >= 1:
+        print('В {} группе есть ваши друзья'.format(group_id))
     else:
-        return group
+        return group_id
 
 
 def main():
@@ -83,11 +84,12 @@ def main():
         'offset': 0,
         'v':'5.92',
         'extended': 0,
-        'fields': 'contacts'
+        'fields': 'members_count'
         }
-        name_group = get_response_api('https://api.vk.com/method/groups.getById', params_a)[0]['name']
-        gid_group = get_response_api('https://api.vk.com/method/groups.getById', params_a)[0]['id']
-        count = get_response_api('https://api.vk.com/method/groups.getMembers', params_a)['count']
+        group_info = get_response_api('https://api.vk.com/method/groups.getById', params_a)
+        name_group = group_info[0]['name']
+        gid_group = group_info[0]['id']
+        count = group_info[0]['members_count']
         dict_json.append({'name': name_group, 'gid': gid_group, 'members_count': count })
     write_json(dict_json)
 
